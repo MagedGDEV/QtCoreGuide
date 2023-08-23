@@ -5,3 +5,5 @@
 it is powerful, and useful for many applications, but it is also complex, and getting started with it can be daunting. This guide is intended to help developers get started with Qt for the first time, and to help experienced developers learn more about best practices for working with Qt.
 
 it uses C++ as its primary programming language, and there are bindings available for a number of other languages, including Python, Java, and JavaScript. This guide will focus on C++.
+
+it uses **CMake** as its build system, and there are a number of tools available for working with CMake projects, before they used **qmake** as its build system, but Qt switched to CMake in version 6.0. This guide will focus on using CMake.
