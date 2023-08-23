@@ -7,3 +7,18 @@ it is powerful, and useful for many applications, but it is also complex, and ge
 it uses C++ as its primary programming language, and there are bindings available for a number of other languages, including Python, Java, and JavaScript. This guide will focus on C++.
 
 it uses **CMake** as its build system, and there are a number of tools available for working with CMake projects, before they used **qmake** as its build system, but Qt switched to CMake in version 6.0. This guide will focus on using CMake.
+
+To print hello world into the terminal using Qt, you can use the following code:
+
+```cpp
+#include <QApplication>
+
+
+int main(int argc, char *argv[])
+{
+    QCoreApplication app(argc, argv);
+    qInfo() << "Hello World";
+
+    return app.exec();
+}
+```
