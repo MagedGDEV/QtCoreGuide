@@ -55,3 +55,6 @@ The compiled object files are linked together, along with the required Qt librar
 ### 5. Finished Binary
 
 The final executable includes your application logic along with Qt's runtime functionality, ready to run on your target platform.
+
+>[!IMPORTANT]
+> This repository is your guide to mastering the core concepts of the Qt framework, starting with the Qt Core module. Note that this guide focuses exclusively on Qt-specific concepts and does not cover general C++ fundamentals. For a deep dive into C++ concepts, check out the [C++ Insights](https://github.com/MagedGDEV/CppInsights) repository.
