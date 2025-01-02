@@ -1,60 +1,75 @@
-# Introduction
+# First Steps
 
-**Qt** is a powerful, cross-platform framework written in **C++** that allows developers to create anything from basic applications to high-performance, multi-threaded software.
+When starting a new project with Qt, your application typically begins with a simple console program that enters an event loop and waits for events to process. Here's an example of a basic Qt application:
 
-What makes Qt unique is its **singular codebase**, which can run on a wide range of platforms, including:
+```cpp
 
-- **Desktop:** Windows, macOS, Linux
-- **Mobile:** Android, iOS
-- **Embedded Devices:** Smart home systems, industrial controllers
-- **Dashboards:** Automotive interfaces, kiosks
+#include <QCoreApplication>
 
-## Why Qt?
+int main(int argc, char *argv[]) {
+    QCoreApplication a(argc, argv);
+    return a.exec();
+}
+```
 
-- **Write Once, Run Anywhere:** A single codebase supports multiple platforms with minimal modifications.
-- **Versatile Applications:** From simple command-line tools to complex GUI-based software, Qt offers the tools you need.
-- **Core Strength:** Qt excels in **multi-threading**, **networking**, **data handling**, and **file manipulation** with its robust libraries.
-- **Scalability:** Designed to handle both lightweight tasks and resource-intensive applications.
+## Setting Up CMake for Your Qt Project
 
-## What You'll Learn in This Guide
+CMake is the tool used to configure and manage the build process for your Qt project. It helps you define how the code should be compiled, linked, and packaged.
 
-In this guide, we’ll explore the **Qt Core module**, which forms the backbone of Qt development. Instead of starting with GUI-based apps, we’ll focus on **console applications**, where you’ll discover the fundamental building blocks of Qt.
+In this section, we will introduce just a few lines of **CMake configuration** that are needed to set up the project. **CMake will be explained in detail later** in the repository.
 
-## C++ Qt Build Process
+1. **Declaring the Project**
 
-When building a Qt application, the process is slightly different from standard C++ projects because Qt introduces additional tools to extend the language's capabilities. Here's an overview of the key steps in the Qt build process:
+    ```cmake
+    project(nameofproject LANGUAGES CXX)
+    ```
 
-### 1. Preprocessor
+    - This line declares your project to CMake and specifies the programming language being used, which is C++ in this case.
+    - Replace **`nameofproject`** with the actual name of your project.
 
-The standard C++ preprocessor handles macros, header inclusions, and conditional compilation. This ensures the source code is ready for the next steps in the build process.
+2. **Setting the C++ Standard**
 
-### 2. Qt Meta-Object Compiler (MOC)
+    ```cmake
+    set(CMAKE_CXX_STANDARD 17)
+    ```
 
-This is where **Qt shines**. The **Meta-Object Compiler (MOC)** is a tool unique to Qt that enables advanced features like:
+    - This line specifies the version of the C++ standard to use for compiling the project.
 
-- **Signals and Slots:** Qt's powerful mechanism for event handling.
-- **Dynamic Object Properties:** Adding properties at runtime.
-- **Reflection:** Querying object types and properties during runtime.
+3. **Finding the Qt Package**
 
-**How MOC Works:**
+    ```cmake
+    find_package(Qt6 REQUIRED COMPONENTS Core)
+    ```
 
-- The MOC scans your source files for **Qt-specific macros**.
-- It generates **additional C++** code behind the scenes. This code provides the functionality you need without requiring changes to the core C++ language.
-- The generated code is then compiled alongside your source files, enabling features like event handling and runtime introspection.
+    - This line instructs CMake to search for the **Qt6 package**. The **`REQUIRED`** flag means that if Qt6 is not found, the build process will fail.
+    - **`Core`** specifies that you want to use the **Qt Core** module, which provides essential Qt functionality like event handling and file management.
 
-Think of MOC as the engine that extends C++'s capabilities to support **Qt’s declarative and dynamic programming model**. Without it, features like signals and slots wouldn’t be possible.
+4. **Creating the Executable**
 
-### 3. Compiler
+```cmake
+add_executable(nameofproject main.cpp)
+```
 
-Once the preprocessor and MOC have done their work, the standard **C++ compiler** compiles the source files and the MOC-generated files. This step translates the code into machine language.
+- This line tells CMake to create an executable named **`nameofproject`** from the source file **`main.cpp`**.
+- You can add more source files to this list if your project grows and you have additional files to compile.
 
-### 4. Linker
+## Hello World in Qt
 
-The compiled object files are linked together, along with the required Qt libraries (e.g., QtCore, QtGui). This step resolves dependencies and creates a complete binary.
+The first thing every programmer does when learning a new technology is to print "Hello World" to the console. This is a simple and effective way to get started with any programming environment, and with Qt, it’s no different.
 
-### 5. Finished Binary
+Here’s a minimal example of a Qt console application that prints "Hello World":
 
-The final executable includes your application logic along with Qt's runtime functionality, ready to run on your target platform.
+```cpp
+#include <QCoreApplication>
+#include <QDebug>
 
->[!IMPORTANT]
-> This repository is your guide to mastering the core concepts of the Qt framework, starting with the Qt Core module. Note that this guide focuses exclusively on Qt-specific concepts and does not cover general C++ fundamentals. For a deep dive into C++ concepts, check out the [C++ Insights](https://github.com/MagedGDEV/CppInsights) repository.
+int main(int argc, char *argv[]) {
+    QCoreApplication a(argc, argv);
+    qInfo() << "Hello World!";
+    return a.exec();
+}
+```
+
+- **`qInfo()`** is a Qt-specific function that writes output to the console. It's similar to the standard **`std::cout`** in C++, but it provides additional features for logging and formatting output in Qt applications.
+- This function prints the message **`"Hello World!"`** to the console.
+- The **`<<`** operator is used to pass the string to **`qInfo()`**, just like you would use **`std::cout`** in standard C++.
