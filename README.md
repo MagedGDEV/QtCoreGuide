@@ -22,7 +22,7 @@ class MyClass : public QObject {
     Q_OBJECT // This macro must appear in the private section
 
 public:
-    MyClass(QObject *parent = nullptr);
+    explicit MyClass(QObject *parent = nullptr);
 };
 ```
 
@@ -31,6 +31,9 @@ public:
 - The **`Q_OBJECT`** macro signals to the **moc** that this class requires meta-object features.
 - It must be placed in the **private section** of the class because the generated code is specific to the class’s implementation details.
 - Without this macro, features like dynamic properties and the meta-object system won’t work.
+
+> [!NOTE]
+> You cannot define a **`QObject`**-based class directly in the **`main`** file (or any **`.cpp`** file) because the **Meta-Object Compiler (moc)** only processes header files (**`.h`**). The **`Q_OBJECT`** macro, which enables features like signals, slots, and the meta-object system, must be placed in a header file so that the **moc** can generate the necessary code. If you define a **`QObject`**-based class in the **`main`** file, the **moc** won’t detect it, and the class won’t have access to these features. Always declare **`QObject`**-based classes in a header file.
 
 ## QObject is Non-Copyable
 
@@ -47,4 +50,63 @@ QObject obj2 = obj1; // Error: QObject is non-copyable
 - **Ownership and Memory Management:** Copying a **`QObject`** could lead to ambiguities in ownership and memory management, which Qt handles automatically through its parent-child mechanism.
 - **Event System:** The event system relies on each object having a unique address. Copying would break this assumption.
 
-By deriving your class from **`QObject`** and using the **`Q_OBJECT`** macro, you unlock the full potential of Qt’s framework, making your classes more powerful and easier to integrate into Qt applications.
+## Parent-Child Relationship in QObject-Based Classes
+
+When working with classes derived from **`QObject`**, you can take advantage of the **parent-child relationship** to simplify memory management and organize your objects hierarchically.
+
+### How to Create a Parent-Child Relationship
+
+To establish a parent-child relationship, pass a **parent object** to the constructor of your QObject-based class. For example:
+
+```cpp
+class MyParentClass : public QObject {
+    Q_OBJECT
+
+public:
+    explicit MyParentClass(QObject *parent = nullptr) : QObject(parent) {}
+};
+
+class MyChildClass : public QObject {
+    Q_OBJECT
+
+public:
+    explicit MyChildClass(QObject *parent = nullptr) : QObject(parent) {}
+};
+```
+
+```cpp
+// Usage
+MyParentClass *parent = new MyParentClass();
+MyChildClass *child = new MyChildClass(parent); // 'parent' owns 'child'
+```
+
+- The **parent** object **`MyParentClass`** takes ownership of the **child** object **`MyChildClass`**.
+- The child is automatically added to the parent’s list of children.
+
+### What Happens When You Delete the Parent?
+
+When a parent object is deleted, all of its **child objects are automatically deleted** as well. This ensures proper memory cleanup and prevents memory leaks.
+
+**For example:**
+
+```cpp
+MyParentClass *parent = new MyParentClass();
+MyChildClass *child = new MyChildClass(parent);
+
+delete parent; // This will also delete 'child'
+```
+
+- Deleting the parent triggers the destruction of all its children recursively.
+- You don’t need to manually delete the child objects; Qt handles this for you.
+
+### Benefits of Parent-Child Relationships
+
+1. **Automatic Memory Management:**
+    - You don’t need to manually delete child objects. When the parent is deleted, all its children are deleted automatically.
+2. **Object Organization:**
+    - Parent-child relationships create a logical hierarchy of objects, making it easier to manage and navigate complex object structures.
+3. **Event Propagation:**
+    - Events can propagate from child objects to their parent, allowing for centralized event handling.
+4. **Dynamic Object Trees:**
+    - You can dynamically add or remove child objects at runtime, and the parent will manage their lifetimes.
+
