@@ -32,4 +32,19 @@ public:
 - It must be placed in the **private section** of the class because the generated code is specific to the class’s implementation details.
 - Without this macro, features like dynamic properties and the meta-object system won’t work.
 
+## QObject is Non-Copyable
+
+One important thing to note is that **`QObject`** **does not allow copying**. This means you cannot copy or assign one **`QObject`** to another. For example, the following code will result in a compilation error:
+
+```cpp
+QObject obj1;
+QObject obj2 = obj1; // Error: QObject is non-copyable
+```
+
+### Why is QObject Non-Copyable?
+
+- **Object Identity:** Each **`QObject`** is meant to have a unique identity, especially in the context of parent-child relationships and object trees.
+- **Ownership and Memory Management:** Copying a **`QObject`** could lead to ambiguities in ownership and memory management, which Qt handles automatically through its parent-child mechanism.
+- **Event System:** The event system relies on each object having a unique address. Copying would break this assumption.
+
 By deriving your class from **`QObject`** and using the **`Q_OBJECT`** macro, you unlock the full potential of Qt’s framework, making your classes more powerful and easier to integrate into Qt applications.
