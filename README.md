@@ -109,4 +109,3 @@ delete parent; // This will also delete 'child'
     - Events can propagate from child objects to their parent, allowing for centralized event handling.
 4. **Dynamic Object Trees:**
     - You can dynamically add or remove child objects at runtime, and the parent will manage their lifetimes.
-
