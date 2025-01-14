@@ -190,3 +190,59 @@ QObject::disconnect(&sender, &Sender::mySignal, &receiver, &Receiver::mySlot);
 
 After calling **`disconnect()`**, the mySignal signal will no longer trigger the mySlot slot.
 
+<!-- ## Connection Types
+
+When connecting signals and slots in Qt, you can specify the type of connection to use. The connection type determines how the signal is delivered to the slot and how the objects are connected. There are three main types of connections
+
+**Syntax:**
+
+```cpp
+connect(sender, &Sender::mySignal, receiver, &Receiver::mySlot, connectionType);
+```
+
+### 1. Direct Connection
+
+- **Default connection type** in Qt.
+- The slot is called immediately when the signal is emitted.
+- The slot is executed in the **emitter’s thread**.
+- This is the fastest connection type but can lead to issues if the slot takes a long time to execute
+
+    ```cpp
+    connect(sender, &Sender::mySignal, receiver, &Receiver::mySlot, Qt::DirectConnection);
+    ```
+
+### 2. Queued Connection
+
+- The slot is called **asynchronously** when the event loop processes the signal.
+- The slot is executed in the **receiver’s thread**.
+- This connection type is useful for **cross-thread communication**.
+
+    ```cpp
+    connect(sender, &Sender::mySignal, receiver, &Receiver::mySlot, Qt::QueuedConnection);
+    ```
+
+### 3. Auto Connection
+
+- The connection type is determined automatically based on the **thread affinity** of the sender and receiver.
+- If the sender and receiver are in the same thread, a **direct connection** is used.
+- If they are in different threads, a **queued connection** is used.
+
+    ```cpp
+    connect(sender, &Sender::mySignal, receiver, &Receiver::mySlot, Qt::AutoConnection);
+    ```
+
+### Choosing the Right Connection Type
+
+- **Direct Connection:**
+    - Use for **fast and synchronous** communication.
+    - Be cautious with long-running slots to avoid blocking the emitter.
+
+- **Queued Connection:**
+
+    - Use for **asynchronous** communication between threads.
+    - Ensure the receiver’s event loop is running to process the signal.
+
+- **Auto Connection:**
+
+    - Let Qt decide the best connection type based on the **thread affinity** of the objects.
+    - Useful for **simplified** signal-slot connections. -->
