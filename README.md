@@ -246,3 +246,98 @@ connect(sender, &Sender::mySignal, receiver, &Receiver::mySlot, connectionType);
 
     - Let Qt decide the best connection type based on the **thread affinity** of the objects.
     - Useful for **simplified** signal-slot connections. -->
+
+Signals and slots are a powerful mechanism in Qt that enable seamless communication between objects. They allow objects to interact without being tightly coupled, making your code more modular and easier to maintain.
+
+One great example of this is **QTimer**, a class that emits a signal at regular intervals. By connecting this signal to a slot, you can perform periodic tasks, such as updating the UI or checking for new data.
+
+### QTimer Example
+
+**`QTimer`** is a Qt class that triggers a signal **`timeout()`** at specified intervals. You can connect this signal to a slot to execute code periodically. Additionally, you can start and stop the timer as needed.
+
+#### How to Use QTimer with Signals and Slots
+
+1. **Create a QTimer Object**
+2. **Set the Interval**
+    - Use setInterval(milliseconds) to specify how often the timer should trigger.
+3. **Connect the `timeout()` Signal to a Slot**
+    - Connect the **`timeout()`** signal to a custom slot that contains the code you want to execute periodically.
+4. **Start and Stop the Timer**
+    - Use **`start()`** to begin the timer and **`stop()`** to halt it.
+
+```cpp
+#include <QTimer>
+#include <QDebug>
+
+class TimerExample : public QObject {
+    Q_OBJECT
+
+public:
+    TimerExample() {
+        // Create a QTimer object
+        timer = new QTimer(this);
+
+        // Set the interval to 1000 milliseconds (1 second)
+        timer->setInterval(1000);
+
+        // Connect the timeout() signal to a slot
+        connect(timer, &QTimer::timeout, this, &TimerExample::onTimeout);
+
+        // Start the timer
+        timer->start();
+
+        // Stop the timer after 5 seconds
+        QTimer::singleShot(5000, this, &TimerExample::stopTimer);
+    }
+
+private slots:
+    void onTimeout() { // Slot to handle the timeout signal
+        qDebug() << "Timer triggered!";
+    }
+
+    void stopTimer() { // Slot to stop the timer
+        qDebug() << "Stopping timer...";
+        timer->stop();
+    }
+
+private:
+    QTimer *timer; // Pointer to the QTimer object
+};
+```
+
+```cpp
+#include <QCoreApplication>
+#include "timerexample.h"
+
+int main(int argc, char *argv[]) {
+    QCoreApplication app(argc, argv);
+
+    TimerExample example; // Create an instance of TimerExample
+
+    return app.exec();
+}
+```
+
+#### Output of QTimer Example
+
+```txt
+Timer triggered!
+Timer triggered!
+Timer triggered!
+Timer triggered!
+Timer triggered!
+Stopping timer...
+```
+
+##### Explanation of QTimer Example
+
+1. **QTimer Setup:**
+    - A **`QTimer`** object is created and configured to trigger every **1000 milliseconds (1 second)**.
+2. **Signal-Slot Connection:**
+    - The **`timeout()`** signal is connected to the **`onTimeout()`** slot.
+3. **Slot Implementation:**
+    - The **`onTimeout()`** slot contains the code to execute when the timer triggers. In this case, it prints a message to the console.
+4. **Start the Timer:**
+    - The timer is started with **`timer->start()`**.
+5. **Stop the Timer:**
+    - After 5 seconds, the **`stopTimer()`** slot is called using **`QTimer::singleShot()`**. This stops the timer by calling **`timer->stop()`**.
