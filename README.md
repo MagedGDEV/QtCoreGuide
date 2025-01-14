@@ -139,3 +139,54 @@ Received value: 42
 3. **Output:**
 
     - The **`mySlot`** slot prints the received value **`42`** to the console using **`qDebug()`**.
+
+### 4. Disconnecting Connections
+
+In Qt, signals and slots are automatically managed to ensure safe and efficient communication between objects. However, there are cases where you might need to **manually disconnect** a signal-slot connection. Let’s explore how and why.
+
+#### Automatic Disconnection
+
+When the **sender** or **receiver** object is destroyed, Qt automatically disconnects the signal-slot connection. This prevents crashes or undefined behavior that could occur if a signal is emitted but the receiver no longer exists.
+
+```cpp
+Sender *sender = new Sender();
+Receiver *receiver = new Receiver();
+
+QObject::connect(sender, &Sender::mySignal, receiver, &Receiver::mySlot);
+
+delete receiver; // The connection is automatically disconnected
+```
+
+- When **`receiver`** is deleted, the connection between **`sender`** and **`receiver`** is automatically removed.
+- If **`sender`** emits a signal after **`receiver`** is deleted, nothing happens because the connection no longer exists.
+
+#### Manual Disconnection
+
+In some cases, you might want to **manually disconnect** a signal-slot connection before the sender or receiver is destroyed. This can be useful in scenarios like:
+
+1. **Dynamic Behavior:**
+    - You want to temporarily disable communication between objects without destroying them.
+2. **Performance Optimization:**
+    - You want to avoid unnecessary signal emissions to slots that are no longer needed.
+
+##### How to Disconnect
+
+Use the **`disconnect()`** function to manually remove a connection. The syntax is similar to **`connect()`**:
+
+```cpp
+QObject::disconnect(sender, &Sender::mySignal, receiver, &Receiver::mySlot);
+```
+
+```cpp
+Sender sender;
+Receiver receiver;
+
+// Connect the signal to the slot
+QObject::connect(&sender, &Sender::mySignal, &receiver, &Receiver::mySlot);
+
+// Disconnect the signal from the slot
+QObject::disconnect(&sender, &Sender::mySignal, &receiver, &Receiver::mySlot);
+```
+
+After calling **`disconnect()`**, the mySignal signal will no longer trigger the mySlot slot.
+
