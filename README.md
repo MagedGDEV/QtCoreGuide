@@ -99,9 +99,155 @@ int main() {
 }
 ```
 
-#### Output
+#### Output of qint Types
 
 ```txt
 Small number: 127
 Large number: 4294967295
+```
+
+## 2. QDate, QTime & QDateTime Classes
+
+Qt provides three powerful classes for working with dates and times:
+
+1. **`QDate`**: Represents a date (year, month, day).
+2. **`QTime`**: Represents a time (hour, minute, second, millisecond).
+3. **`QDateTime`**: Represents a date and time together.
+
+These classes are part of the **`QtCore`** module and offer a wide range of functionalities for manipulating dates and times. They are designed to be easy to use, portable, and highly customizable.
+
+---
+
+### Common Use Cases
+
+#### 1. **`QDate`**
+
+Represents a date (year, month, day).
+
+##### Example of `QDate`
+
+```cpp
+#include <QDate>
+#include <QDebug>
+
+int main() {
+    QDate currentDate = QDate::currentDate(); // Get the current date
+
+    // Manipulate the date
+    currentDate = currentDate.addYears(1);   // Add 1 year
+    currentDate = currentDate.addMonths(2);  // Add 2 months
+    currentDate = currentDate.addDays(30);   // Add 30 days
+
+    // Format and display the date
+    qInfo() << "Formatted Date (dd/MM/yyyy):" << currentDate.toString("dd/MM/yyyy");
+    qInfo() << "ISO Format:" << currentDate.toString(Qt::ISODate);
+
+    return 0;
+}
+```
+
+##### Output of `QDate` Example
+
+```txt
+Formatted Date (dd/MM/yyyy): "30/05/2024"
+ISO Format: "2024-05-30"
+```
+
+---
+
+#### 2. **`QTime`**
+
+Represents a time (hour, minute, second, millisecond).
+
+##### Example of `QTime`
+
+```cpp
+#include <QTime>
+#include <QDebug>
+
+int main() {
+    QTime now = QTime::currentTime(); // Get the current time
+
+    // Manipulate the time
+    now = now.addSecs(3600);  // Add 1 hour (3600 seconds)
+    now = now.addMSecs(1000); // Add 1 second (1000 milliseconds)
+
+    // Format and display the time
+    qInfo() << "Formatted Time (hh:mm:ss.zzz):" << now.toString("hh:mm:ss.zzz");
+
+    return 0;
+}
+```
+
+##### Output of `QTime` Example
+
+```txt
+Formatted Time (hh:mm:ss.zzz): "14:30:45.000"
+```
+
+---
+
+#### 3. **`QDateTime`**
+
+Represents a date and time together.
+
+#####  Example of `QDateTime`
+
+```cpp
+#include <QDateTime>
+#include <QDebug>
+
+int main() {
+    QDateTime currentDateTime = QDateTime::currentDateTime(); // Get the current date and time
+
+    // Manipulate the date and time
+    currentDateTime = currentDateTime.addDays(1); // Add 1 day
+
+    // Format and display the date and time
+    qInfo() << "Formatted DateTime:" << currentDateTime.toString("dd/MM/yyyy hh:mm:ss");
+
+    return 0;
+}
+```
+
+#### Output of `QDateTime` Example
+
+```txt
+Formatted DateTime: "31/05/2023 14:30:45"
+```
+
+---
+
+### Practical Example: Checking for an Expired Date
+
+You can use `QDate` to check if a date has expired (e.g., for license validation or subscription checks).
+
+```cpp
+#include <QDate>
+#include <QDebug>
+
+int main() {
+    QDate expirationDate(2025, 12, 31); // Set expiration date
+    QDate currentDate = QDate::currentDate(); // Get current date
+
+    if (currentDate > expirationDate) {
+        qInfo() << "License has expired!";
+    } else {
+        qInfo() << "License is valid.";
+    }
+
+    return 0;
+}
+```
+
+#### Output (if current date is after December 31, 2025)
+
+```txt
+License has expired!
+```
+
+#### Output (if current date is before or on December 31, 2025)
+
+```txt
+License is valid.
 ```
