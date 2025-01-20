@@ -140,6 +140,9 @@ Received value: 42
 
     - The **`mySlot`** slot prints the received value **`42`** to the console using **`qDebug()`**.
 
+> [!TIP]
+> To obtain a pointer to the object that emitted a signal in a slot, you can use the **`QObject::sender()`** function. This function returns a pointer to the sender object, allowing you to identify or interact with the source of the signal.
+
 ### 4. Disconnecting Connections
 
 In Qt, signals and slots are automatically managed to ensure safe and efficient communication between objects. However, there are cases where you might need to **manually disconnect** a signal-slot connection. Let’s explore how and why.
