@@ -191,7 +191,7 @@ Formatted Time (hh:mm:ss.zzz): "14:30:45.000"
 
 Represents a date and time together.
 
-#####  Example of `QDateTime`
+##### Example of `QDateTime`
 
 ```cpp
 #include <QDateTime>
@@ -251,3 +251,6 @@ License has expired!
 ```txt
 License is valid.
 ```
+
+> [!NOTE]
+> The code examples provided are written for **Qt 6**. If you are using **Qt 5**, you may need to make slight adjustments to the syntax. Additionally, the **`QDate`**, **`QTime`**, and **`QDateTime`** classes offer a wide range of functionalities beyond what is shown here. For a comprehensive list of features and methods, refer to the official [Qt Documentation](https://doc.qt.io/).
