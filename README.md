@@ -253,7 +253,7 @@ License is valid.
 ```
 
 > [!NOTE]
-> The code examples provided are written for **Qt 6**. If you are using **Qt 5**, you may need to make slight adjustments to the syntax. Additionally, the **`QDate`**, **`QTime`**, and **`QDateTime`** classes offer a wide range of functionalities beyond what is shown here. For a comprehensive list of features and methods, refer to the official [Qt Documentation](https://doc.qt.io/).
+> The code examples provided are written for **Qt 6**. If you are using **Qt 5**, you may need to make slight adjustments to the syntax. Additionally, the **`QDate`**, **`QTime`**, and **`QDateTime`** classes offer a wide range of functionalities beyond what is shown here. For a comprehensive list of features and methods.
 
 ## 3. QString Class
 
@@ -451,19 +451,72 @@ v3 cannot be converted to QString.
 4. **Handling Incompatible Types**:
    - If a **`QVariant`** cannot be converted to the requested type, the conversion methods return a default value (e.g., **`0`** for **`toInt()`** or an empty string for **`toString()`**).
 
-## 6. QStringList
+## 6. QList
+
+The **`QList`** class in Qt is a generic container for storing and manipulating lists of objects. It is part of the **`QtCore`** module and provides a flexible and efficient way to work with collections of items. **`QList`** is one of Qt's most commonly used container classes and is optimized for performance and ease of use.
+
+### Key Features of `QList`
+
+- **Dynamic Size**: Automatically resizes to accommodate new items.
+- **Efficient Memory Management**: Uses implicit sharing to reduce memory usage.
+- **Rich API**: Provides methods for appending, inserting, removing, and searching items.
+- **Compatibility**: Works seamlessly with Qt's foreach loop and range-based for loops.
+
+---
+
+## Example: Using `QList`
+
+```cpp
+#include <QList>
+#include <QDebug>
+
+int main() {
+    // Create a QList of integers
+    QList<int> numbers = {10, 20, 30, 40, 50};
+
+    // Append an item to the list
+    numbers.append(60);
+    qInfo() << "After Append:" << numbers; // Output: (10, 20, 30, 40, 50, 60)
+
+    // Insert an item at a specific position
+    numbers.insert(2, 25);
+    qInfo() << "After Insert:" << numbers; // Output: (10, 20, 25, 30, 40, 50, 60)
+
+    // Remove an item by value
+    numbers.removeOne(30);
+    qInfo() << "After Remove:" << numbers; // Output: (10, 20, 25, 40, 50, 60)
+
+    // Check if the list contains a specific item
+    if (numbers.contains(25)) {
+        qInfo() << "The list contains 25.";
+    }
+
+    // Iterate over the list using a range-based for loop
+    qInfo() << "List Items:";
+    for (int num : numbers) {
+        qInfo() << num;
+    }
+
+    return 0;
+}
+```
+
+> [!NOTE]
+> In **Qt 6**, **`QVector`** is an alias for **`QList`**, meaning they are the same class. However, in **Qt 5**, **`QVector`** and **`QList`** are distinct classes with different internal implementations. If you are using Qt 5, be mindful of the differences between the two.
+
+## 7. QStringList
 
 The **`QStringList`** class in Qt is a specialized container for storing and manipulating lists of strings **`QString`**. It is part of the **`QtCore`** module and provides a rich set of methods for working with string collections. **`QStringList`** is essentially a subclass of **`QList<QString>`**, optimized for string operations.
 
-## Key Features of `QStringList`
+### Key Features of `QStringList`
 
 - **String-Specific Operations**: Provides methods for sorting, filtering, joining, and splitting strings.
-- **Compatibility**: Inherits all the functionality of `QList<QString>`.
+- **Compatibility**: Inherits all the functionality of **`QList<QString>`**.
 - **Ease of Use**: Simplifies common tasks like splitting a string into a list or joining a list into a single string.
 
 ---
 
-## Example: Using `QStringList`
+### Example: Using `QStringList`
 
 ```cpp
 #include <QStringList>
