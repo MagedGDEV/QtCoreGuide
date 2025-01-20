@@ -541,3 +541,54 @@ int main() {
     return 0;
 }
 ```
+
+## 8. QMap
+
+The **`QMap`** class in Qt is a template-based container that stores key-value pairs in sorted order. It is part of the **`QtCore`** module and provides an efficient way to associate keys with values. **`QMap`** is implemented as a balanced binary tree, ensuring fast lookups, insertions, and deletions.
+
+## Key Features of `QMap`
+
+- **Sorted Keys**: Keys are stored in ascending order, making it easy to iterate over the map in a predictable sequence.
+- **Unique Keys**: Each key in a **`QMap`** must be unique. If you need to store multiple values for the same key, use **`QMultiMap`**.
+- **Efficient Lookups**: Provides fast access to values using keys.
+- **Rich API**: Includes methods for inserting, removing, and searching for key-value pairs.
+
+---
+
+## Example: Using `QMap`
+
+```cpp
+#include <QMap>
+#include <QDebug>
+
+int main() {
+    // Create a QMap with QString keys and int values
+    QMap<QString, int> ages;
+    ages.insert("Alice", 25);
+    ages.insert("Bob", 30);
+    ages.insert("Charlie", 35);
+
+    // Access values using keys
+    qInfo() << "Alice's age:" << ages["Alice"]; // Output: 25
+
+    // Check if a key exists
+    if (ages.contains("Bob")) {
+        qInfo() << "Bob's age:" << ages["Bob"]; // Output: 30
+    }
+
+    // Iterate over the map
+    qInfo() << "All ages:";
+    for (auto it = ages.begin(); it != ages.end(); ++it) {
+        qInfo() << it.key() << ":" << it.value();
+    }
+
+    // Remove a key-value pair
+    ages.remove("Charlie");
+    qInfo() << "After removing Charlie:" << ages; // Output: ("Alice", 25), ("Bob", 30)
+
+    return 0;
+}
+```
+
+> [!IMPORTANT]
+> The **`qDeleteAll`** function is a Qt utility for deleting all dynamically allocated objects stored in a container (e.g., **`QList`**, **`QVector`**). It iterates through the container and calls **`delete`** on each pointer, ensuring proper memory cleanup. Use **`qDeleteAll`** to avoid memory leaks when working with containers of pointers.
