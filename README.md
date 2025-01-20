@@ -118,7 +118,7 @@ These classes are part of the **`QtCore`** module and offer a wide range of func
 
 ---
 
-### Common Use Cases
+### Common Use Cases for `QDate`, `QTime`, and `QDateTime`
 
 #### 1. **`QDate`**
 
@@ -254,3 +254,84 @@ License is valid.
 
 > [!NOTE]
 > The code examples provided are written for **Qt 6**. If you are using **Qt 5**, you may need to make slight adjustments to the syntax. Additionally, the **`QDate`**, **`QTime`**, and **`QDateTime`** classes offer a wide range of functionalities beyond what is shown here. For a comprehensive list of features and methods, refer to the official [Qt Documentation](https://doc.qt.io/).
+
+Here’s a revised and improved version of your explanation about the **`QString`** class for your README:
+
+---
+
+## 3. QString Class
+
+In Qt, the **`QString`** class is used to store and manipulate strings. It provides a wide range of functionalities for working with text, making it more powerful and flexible than standard C++ strings (`std::string`). `QString` is part of the **`QtCore`** module and is designed to handle Unicode text seamlessly.
+
+---
+
+### Common Use Cases of `QString`
+
+### 1. **Extracting Substrings**
+
+- Use `mid()` to extract a substring from a string.
+
+   ```cpp
+   QString str = "Hello, World!";
+   QString subStr = str.mid(1, 3); // Extract 3 characters starting from index 1
+   qInfo() << subStr; // Output: "ell"
+   ```
+
+- If the string is shorter than the requested length, `mid()` returns as many characters as possible without causing an error.
+
+---
+
+### 2. **Inserting Text**
+
+- Use `insert()` to insert text at a specific position.
+
+   ```cpp
+   QString str = "Maged Elesseily";
+   str.insert(0, "Eng. "); // Insert "Eng. " at the beginning
+   qInfo() << str; // Output: "Eng. Maged Elesseily"
+   ```
+
+---
+
+### 3. **Splitting Strings**
+
+- Use `split()` to divide a string into a list of substrings based on a separator.
+
+   ```cpp
+   QString str = "Apple Banana Cherry";
+   QStringList fruits = str.split(" "); // Split by space
+   for (const QString& fruit : fruits) {
+       qInfo() << fruit;
+   }
+   ```
+
+#### Output of `split()` Example
+
+```txt
+"Apple"
+"Banana"
+"Cherry"
+```
+
+---
+
+### 4. **Finding Substrings**
+
+- Use `indexOf()` to find the position of a substring.
+
+   ```cpp
+   QString str = "Hello, World!";
+   int index = str.indexOf("World"); // Find the position of "World"
+   qInfo() << "Index of 'World':" << index; // Output: 7
+   ```
+
+---
+
+### 5. **Other Useful Functions**
+
+- `toUpper()` / `toLower()`: Convert the string to uppercase or lowercase.
+- `trimmed()`: Remove leading and trailing whitespace.
+- `replace()`: Replace occurrences of a substring with another string.
+- `startsWith()` / `endsWith()`: Check if the string starts or ends with a specific substring.
+- `contains()`: Check if the string contains a specific substring.
+- ... and many more!
