@@ -47,7 +47,7 @@ quint32 g = 70; // 32-bit unsigned integer
 quint64 h = 80; // 64-bit unsigned integer
 ```
 
-These types ensure that the size of the integer is consistent across all platforms. For example, `qint8` is always an 8-bit signed integer, regardless of the operating system or hardware.
+These types ensure that the size of the integer is consistent across all platforms. For example, **`qint8`** is always an 8-bit signed integer, regardless of the operating system or hardware.
 
 ---
 
@@ -63,7 +63,7 @@ typedef unsigned short quint16; // quint16 is an alias for unsigned short
 // ... and so on for other types
 ```
 
-This means that `qint8` is just another name for `signed char`, `qint16` is another name for `short`, and so on. By using these aliases, you ensure that your code is portable and behaves consistently across different platforms.
+This means that **`qint8`** is just another name for **`signed char`**, `qint16` is another name for **`short`**, and so on. By using these aliases, you ensure that your code is portable and behaves consistently across different platforms.
 
 ---
 
@@ -220,7 +220,7 @@ Formatted DateTime: "31/05/2023 14:30:45"
 
 ### Practical Example: Checking for an Expired Date
 
-You can use `QDate` to check if a date has expired (e.g., for license validation or subscription checks).
+You can use **`QDate`** to check if a date has expired (e.g., for license validation or subscription checks).
 
 ```cpp
 #include <QDate>
@@ -257,7 +257,7 @@ License is valid.
 
 ## 3. QString Class
 
-In Qt, the **`QString`** class is used to store and manipulate strings. It provides a wide range of functionalities for working with text, making it more powerful and flexible than standard C++ strings (`std::string`). `QString` is part of the **`QtCore`** module and is designed to handle Unicode text seamlessly.
+In Qt, the **`QString`** class is used to store and manipulate strings. It provides a wide range of functionalities for working with text, making it more powerful and flexible than standard C++ strings **`std::string`**. **`QString`** is part of the **`QtCore`** module and is designed to handle Unicode text seamlessly.
 
 ---
 
@@ -265,7 +265,7 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 
 #### 1. **Extracting Substrings**
 
-- Use `mid()` to extract a substring from a string.
+- Use **`mid()`** to extract a substring from a string.
 
    ```cpp
    QString str = "Hello, World!";
@@ -279,7 +279,7 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 
 #### 2. **Inserting Text**
 
-- Use `insert()` to insert text at a specific position.
+- Use **`insert()`** to insert text at a specific position.
 
    ```cpp
    QString str = "Maged Elesseily";
@@ -291,7 +291,7 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 
 #### 3. **Splitting Strings**
 
-- Use `split()` to divide a string into a list of substrings based on a separator.
+- Use **`split()`** to divide a string into a list of substrings based on a separator.
 
    ```cpp
    QString str = "Apple Banana Cherry";
@@ -325,14 +325,12 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 
 #### 5. **Other Useful Functions**
 
-- `toUpper()` / `toLower()`: Convert the string to uppercase or lowercase.
-- `trimmed()`: Remove leading and trailing whitespace.
-- `replace()`: Replace occurrences of a substring with another string.
-- `startsWith()` / `endsWith()`: Check if the string starts or ends with a specific substring.
-- `contains()`: Check if the string contains a specific substring.
+- **`toUpper()`** / **`toLower()`**: Convert the string to uppercase or lowercase.
+- **`trimmed()`**: Remove leading and trailing whitespace.
+- **`replace()`**: Replace occurrences of a substring with another string.
+- **`startsWith()`** / **`endsWith()`**: Check if the string starts or ends with a specific substring.
+- **`contains()`**: Check if the string contains a specific substring.
 - ... and many more!
-
-Here’s a concise and clear explanation of **`QByteArray`** that you can add to your repository:
 
 ## 4. QByteArray Class
 
@@ -363,31 +361,27 @@ int main() {
 }
 ```
 
-Here’s a clear and concise explanation of the **`QVariant`** class for your repository, along with an example demonstrating its usage:
-
----
-
 ## 5. QVariant Class
 
-The **`QVariant`** class in Qt is a versatile container that can store values of different types. It is part of the **`QtCore`** module and is particularly useful when you need to handle data of unknown or varying types. `QVariant` is widely used in Qt, especially in conjunction with **QML** and model-view programming.
+The **`QVariant`** class in Qt is a versatile container that can store values of different types. It is part of the **`QtCore`** module and is particularly useful when you need to handle data of unknown or varying types. **`QVariant`** is widely used in Qt, especially in conjunction with **QML** and model-view programming.
 
 ### Key Features of `QVariant`
 
-- **Type Flexibility**: Can store values of many types, including `int`, `QString`, `QDate`, `QByteArray`, and even custom types.
+- **Type Flexibility**: Can store values of many types, including **`int`, `QString`, `QDate`, `QByteArray`**, and even custom types.
 - **Type Detection**: Can determine the type of the stored value at runtime.
 - **Implicit Sharing**: Efficiently manages memory by sharing data between copies.
 
 ### Common Use Cases of `QVariant`
 
 1. **Storing and Retrieving Values**:
-   - Store a value of any type in a `QVariant`.
+   - Store a value of any type in a **`QVariant`**.
    - Retrieve the value by converting it back to its original type.
 
 2. **Type Checking**:
-   - Check the type of the stored value using `type()` or `canConvert<T>()`.
+   - Check the type of the stored value using **`type()`** or **`canConvert<T>()`**.
 
 3. **Working with QML**:
-   - `QVariant` is heavily used in QML to pass data between C++ and QML.
+   - **`QVariant`** is heavily used in QML to pass data between C++ and QML.
 
 ---
 
@@ -446,13 +440,51 @@ v3 cannot be converted to QString.
 #### Explanation of the Example
 
 1. **Storing Values**:
-   - `QVariant` can store values of different types, such as `int`, `QString`, and `double`.
+   - **`QVariant`** can store values of different types, such as **`int`**, **`QString`**, and **`double`**.
 
 2. **Retrieving Values**:
-   - Use methods like `toInt()`, `toString()`, and `toDouble()` to retrieve the stored value.
+   - Use methods like **`toInt()`**, **`toString()`**, and **`toDouble()`** to retrieve the stored value.
 
 3. **Type Checking**:
-   - Use `canConvert<T>()` to check if the `QVariant` can be converted to a specific type.
+   - Use **`canConvert<T>()`** to check if the **`QVariant`** can be converted to a specific type.
 
 4. **Handling Incompatible Types**:
-   - If a `QVariant` cannot be converted to the requested type, the conversion methods return a default value (e.g., `0` for `toInt()` or an empty string for `toString()`).
+   - If a **`QVariant`** cannot be converted to the requested type, the conversion methods return a default value (e.g., **`0`** for **`toInt()`** or an empty string for **`toString()`**).
+
+## 6. QStringList
+
+The **`QStringList`** class in Qt is a specialized container for storing and manipulating lists of strings **`QString`**. It is part of the **`QtCore`** module and provides a rich set of methods for working with string collections. **`QStringList`** is essentially a subclass of **`QList<QString>`**, optimized for string operations.
+
+## Key Features of `QStringList`
+
+- **String-Specific Operations**: Provides methods for sorting, filtering, joining, and splitting strings.
+- **Compatibility**: Inherits all the functionality of `QList<QString>`.
+- **Ease of Use**: Simplifies common tasks like splitting a string into a list or joining a list into a single string.
+
+---
+
+## Example: Using `QStringList`
+
+```cpp
+#include <QStringList>
+#include <QDebug>
+
+int main() {
+    // Create a QStringList
+    QStringList fruits = {"Apple", "Banana", "Cherry"};
+
+    // Join the list into a single string
+    QString joined = fruits.join(", ");
+    qInfo() << "Joined String:" << joined; // Output: "Apple, Banana, Cherry"
+
+    // Filter the list
+    QStringList filtered = fruits.filter("an");
+    qInfo() << "Filtered List:" << filtered; // Output: ("Banana")
+
+    // Sort the list
+    fruits.sort();
+    qInfo() << "Sorted List:" << fruits; // Output: ("Apple", "Banana", "Cherry")
+
+    return 0;
+}
+```
