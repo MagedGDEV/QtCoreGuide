@@ -255,10 +255,6 @@ License is valid.
 > [!NOTE]
 > The code examples provided are written for **Qt 6**. If you are using **Qt 5**, you may need to make slight adjustments to the syntax. Additionally, the **`QDate`**, **`QTime`**, and **`QDateTime`** classes offer a wide range of functionalities beyond what is shown here. For a comprehensive list of features and methods, refer to the official [Qt Documentation](https://doc.qt.io/).
 
-Here’s a revised and improved version of your explanation about the **`QString`** class for your README:
-
----
-
 ## 3. QString Class
 
 In Qt, the **`QString`** class is used to store and manipulate strings. It provides a wide range of functionalities for working with text, making it more powerful and flexible than standard C++ strings (`std::string`). `QString` is part of the **`QtCore`** module and is designed to handle Unicode text seamlessly.
@@ -267,7 +263,7 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 
 ### Common Use Cases of `QString`
 
-### 1. **Extracting Substrings**
+#### 1. **Extracting Substrings**
 
 - Use `mid()` to extract a substring from a string.
 
@@ -281,7 +277,7 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 
 ---
 
-### 2. **Inserting Text**
+#### 2. **Inserting Text**
 
 - Use `insert()` to insert text at a specific position.
 
@@ -293,7 +289,7 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 
 ---
 
-### 3. **Splitting Strings**
+#### 3. **Splitting Strings**
 
 - Use `split()` to divide a string into a list of substrings based on a separator.
 
@@ -305,7 +301,7 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
    }
    ```
 
-#### Output of `split()` Example
+##### Output of `split()` Example
 
 ```txt
 "Apple"
@@ -315,7 +311,7 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 
 ---
 
-### 4. **Finding Substrings**
+#### 4. **Finding Substrings**
 
 - Use `indexOf()` to find the position of a substring.
 
@@ -327,7 +323,7 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 
 ---
 
-### 5. **Other Useful Functions**
+#### 5. **Other Useful Functions**
 
 - `toUpper()` / `toLower()`: Convert the string to uppercase or lowercase.
 - `trimmed()`: Remove leading and trailing whitespace.
@@ -335,3 +331,128 @@ In Qt, the **`QString`** class is used to store and manipulate strings. It provi
 - `startsWith()` / `endsWith()`: Check if the string starts or ends with a specific substring.
 - `contains()`: Check if the string contains a specific substring.
 - ... and many more!
+
+Here’s a concise and clear explanation of **`QByteArray`** that you can add to your repository:
+
+## 4. QByteArray Class
+
+The **`QByteArray`** class in Qt is a container for storing and manipulating raw data, including binary data and 8-bit strings (e.g., ASCII or UTF-8). It is part of the **`QtCore`** module and is particularly useful for:
+
+- **Storing binary data** (e.g., images, audio, serialized objects).
+- **Working with 8-bit strings** (e.g., ASCII or UTF-8 encoded text).
+- **Reading and writing files**.
+- **Network communication**.
+
+### Key Features of `QByteArray`
+
+- **Dynamic Size**: Automatically resizes to accommodate new data.
+- **Efficient Memory Management**: Uses implicit sharing to reduce memory usage.
+- **Rich API**: Provides methods for appending, inserting, replacing, and searching data.
+
+### Example of Using `QByteArray`
+
+```cpp
+#include <QByteArray>
+#include <QDebug>
+
+int main() {
+    QByteArray data = "Hello";
+    data.append(", World!"); // Append data
+    qInfo() << data; // Output: "Hello, World!"
+    return 0;
+}
+```
+
+Here’s a clear and concise explanation of the **`QVariant`** class for your repository, along with an example demonstrating its usage:
+
+---
+
+## 5. QVariant Class
+
+The **`QVariant`** class in Qt is a versatile container that can store values of different types. It is part of the **`QtCore`** module and is particularly useful when you need to handle data of unknown or varying types. `QVariant` is widely used in Qt, especially in conjunction with **QML** and model-view programming.
+
+### Key Features of `QVariant`
+
+- **Type Flexibility**: Can store values of many types, including `int`, `QString`, `QDate`, `QByteArray`, and even custom types.
+- **Type Detection**: Can determine the type of the stored value at runtime.
+- **Implicit Sharing**: Efficiently manages memory by sharing data between copies.
+
+### Common Use Cases of `QVariant`
+
+1. **Storing and Retrieving Values**:
+   - Store a value of any type in a `QVariant`.
+   - Retrieve the value by converting it back to its original type.
+
+2. **Type Checking**:
+   - Check the type of the stored value using `type()` or `canConvert<T>()`.
+
+3. **Working with QML**:
+   - `QVariant` is heavily used in QML to pass data between C++ and QML.
+
+---
+
+### Example: Using `QVariant`
+
+```cpp
+#include <QVariant>
+#include <QDebug>
+
+int main() {
+    // Store different types in QVariant
+    QVariant v1 = 42;              // int
+    QVariant v2 = "Hello, World!"; // QString
+    QVariant v3 = 3.14;            // double
+
+    // Retrieve and print values
+    qInfo() << "v1:" << v1.toInt();       // Output: 42
+    qInfo() << "v2:" << v2.toString();    // Output: "Hello, World!"
+    qInfo() << "v3:" << v3.toDouble();    // Output: 3.14
+
+    // Check if a QVariant can be converted to a specific type
+    if (v1.canConvert<int>()) {
+        qInfo() << "v1 is an int:" << v1.toInt();
+    } else {
+        qInfo() << "v1 is not an int.";
+    }
+
+    if (v2.canConvert<QString>()) {
+        qInfo() << "v2 is a QString:" << v2.toString();
+    } else {
+        qInfo() << "v2 is not a QString.";
+    }
+
+    // Attempt to convert a QVariant to an incompatible type
+    if (v3.canConvert<QString>()) {
+        qInfo() << "v3 as QString:" << v3.toString();
+    } else {
+        qInfo() << "v3 cannot be converted to QString.";
+    }
+
+    return 0;
+}
+```
+
+#### Output of Using `QVariant`
+
+```txt
+v1: 42
+v2: "Hello, World!"
+v3: 3.14
+v1 is an int: 42
+v2 is a QString: "Hello, World!"
+v3 cannot be converted to QString.
+```
+
+#### Explanation of the Example
+
+1. **Storing Values**:
+   - `QVariant` can store values of different types, such as `int`, `QString`, and `double`.
+
+2. **Retrieving Values**:
+   - Use methods like `toInt()`, `toString()`, and `toDouble()` to retrieve the stored value.
+
+3. **Type Checking**:
+   - Use `canConvert<T>()` to check if the `QVariant` can be converted to a specific type.
+
+4. **Handling Incompatible Types**:
+   - If a `QVariant` cannot be converted to the requested type, the conversion methods return a default value (e.g., `0` for `toInt()` or an empty string for `toString()`).
